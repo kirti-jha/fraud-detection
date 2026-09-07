@@ -1,4 +1,4 @@
-const API_BASE = '/api/v1';
+const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
 
 export const fetchApi = async <T = any>(
   endpoint: string,
@@ -21,12 +21,24 @@ export const fetchApi = async <T = any>(
       headers,
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get('content-type') || '';
+    let data: any;
+
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      data = {
+        error: res.status === 404
+          ? 'Backend API endpoint not found (404).'
+          : text.substring(0, 100) || `HTTP ${res.status}: ${res.statusText}`
+      };
+    }
 
     if (!res.ok) {
       return {
         success: false,
-        error: data.error || `HTTP ${res.status}: ${res.statusText}`,
+        error: data.error || data.message || `HTTP ${res.status}: ${res.statusText}`,
       };
     }
 

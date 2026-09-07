@@ -46,6 +46,17 @@
   }
 }
 
+/* Chrome/Safari Autofill Dark Mode Artifact Fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #0B0F0E inset !important;
+  -webkit-text-fill-color: #F1F5F2 !important;
+  caret-color: #F1F5F2;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -134,8 +145,8 @@
 .input-premium:focus {
   outline: none;
   border-color: #10B981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
-  background-color: #151C1A;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  background-color: #121816;
 }
 
 .input-premium::placeholder {
@@ -161,7 +172,7 @@
 
 .btn-primary:hover {
   background-color: #34D399;
-  box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 20px -2px rgba(16, 185, 129, 0.35);
 }
 
 .btn-primary:active {

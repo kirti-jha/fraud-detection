@@ -16,6 +16,7 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
+    "types": ["vite/client"],
     "paths": {
       "@fraudshield/shared-types": ["../../packages/shared-types/src/index.ts"]
     }
