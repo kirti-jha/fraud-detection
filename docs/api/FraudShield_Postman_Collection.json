@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "FraudShield API — Real-Time FinTech Risk & Fraud Engine",
+    "description": "Postman Collection for FraudShield API (Authentication, Transactions, Risk Scoring, Alerts, Audit Logs).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/v1/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "health"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Login Analyst",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"analyst@fraudshield.io\",\n  \"password\": \"Password123!\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/v1/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Submit Transaction (High Risk - ₹85,000 + New Device)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Idempotency-Key", "value": "IDEM_SUSPICIOUS_001" },
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33\",\n  \"amount\": 85000,\n  \"currency\": \"INR\",\n  \"deviceId\": \"DEV_SUSPICIOUS_991\",\n  \"ipAddress\": \"103.44.12.99\",\n  \"location\": \"Mumbai\",\n  \"merchantCategory\": \"ECOMMERCE\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/v1/transactions",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "transactions"]
+        }
+      }
+    },
+    {
+      "name": "List Ledger Transactions",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:4000/api/v1/transactions?limit=20",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "transactions"]
+        }
+      }
+    },
+    {
+      "name": "List Fraud Alerts Queue",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:4000/api/v1/alerts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "alerts"]
+        }
+      }
+    }
+  ]
+}
