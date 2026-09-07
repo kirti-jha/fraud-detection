@@ -11,7 +11,7 @@
     "dev": "npm run dev --workspace=@fraudshield/api",
     "dev:web": "npm run dev --workspace=@fraudshield/web",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:web\"",
-    "build": "npm run build --workspace=@fraudshield/shared-types && npm run build --workspace=@fraudshield/api && npm run build --workspace=@fraudshield/web && node -e \"require('fs').cpSync('apps/web/dist', 'dist', {recursive: true})\"",
+    "build": "npm run build --workspace=@fraudshield/shared-types && npm run build --workspace=@fraudshield/api && npm run build --workspace=@fraudshield/web",
     "test": "npm run test --workspaces"
   },
   "devDependencies": {
