@@ -171,7 +171,7 @@ export const AlertDetail: React.FC = () => {
 
           <div className="flex-1 space-y-3 overflow-y-auto max-h-[350px] pr-1">
             {alert.notes && alert.notes.length > 0 ? (
-              alert.notes.map((note) => (
+              alert.notes.map((note: any) => (
                 <div key={note.id} className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg text-xs space-y-1">
                   <div className="flex items-center justify-between text-[11px] text-[#9AA9A2] font-mono">
                     <span className="font-semibold text-[#34D399]">{note.analystName}</span>

@@ -109,7 +109,7 @@ export const DecisionReplay: React.FC = () => {
             <h3 className="text-sm font-bold text-[#F1F5F2]">Execution Timeline & Payload Breakdown</h3>
 
             <div className="space-y-4">
-              {replay.steps.map((step) => (
+              {replay.steps.map((step: any) => (
                 <div key={step.stepNumber} className="graphite-card p-5 space-y-3">
                   <div className="flex items-center justify-between border-b border-[#26332E] pb-3">
                     <div className="flex items-center space-x-3">
