@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { fetchApi } from '../api/client';
 import { Code, Send, Copy, Check, Clock } from 'lucide-react';
 
@@ -63,19 +63,19 @@ export const ApiPlayground: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="border-b border-[#26332E] pb-6">
-        <h1 className="text-2xl font-bold text-[#F1F5F2] tracking-tight flex items-center space-x-3">
-          <Code className="w-6 h-6 text-[#34D399]" />
+      <div className="border-b border-slate-200 pb-6">
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight flex items-center space-x-3">
+          <Code className="w-6 h-6 text-emerald-600" />
           <span>Developer API Playground</span>
         </h1>
-        <p className="text-[#9AA9A2] text-xs font-mono mt-1">Interactive API sandbox for testing real-time risk decisioning endpoints</p>
+        <p className="text-slate-500 text-xs font-mono mt-1">Interactive API sandbox for testing real-time risk decisioning endpoints</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         {/* Left Col: Request Editor */}
         <div className="graphite-card p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#26332E] pb-3 font-mono">
-            <span className="text-xs font-bold text-[#34D399] uppercase">POST /api/v1/transactions</span>
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3 font-mono">
+            <span className="text-xs font-bold text-emerald-600 uppercase">POST /api/v1/transactions</span>
             <button
               onClick={handleSendRequest}
               disabled={loading}
@@ -87,23 +87,23 @@ export const ApiPlayground: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider mb-2 font-mono">
+            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-mono">
               JSON Request Body
             </label>
             <textarea
               rows={12}
               value={payloadText}
               onChange={(e) => setPayloadText(e.target.value)}
-              className="w-full bg-[#0B0F0E] border border-[#26332E] rounded-lg p-4 font-mono text-xs text-[#34D399] focus:outline-none focus:border-[#10B981] leading-relaxed"
+              className="w-full bg-white border border-slate-200 rounded-lg p-4 font-mono text-xs text-emerald-600 focus:outline-none focus:border-emerald-500 leading-relaxed"
             />
           </div>
 
           <div className="pt-2">
             <button
               onClick={copyCurl}
-              className="w-full py-2 bg-[#0B0F0E] hover:bg-[#101615] border border-[#26332E] rounded-lg text-xs font-mono text-[#9AA9A2] hover:text-[#F1F5F2] flex items-center justify-center space-x-2 transition"
+              className="w-full py-2 bg-white hover:bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-500 hover:text-slate-800 flex items-center justify-center space-x-2 transition"
             >
-              {copied ? <Check className="w-4 h-4 text-[#34D399]" /> : <Copy className="w-4 h-4 text-[#34D399]" />}
+              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-emerald-600" />}
               <span>{copied ? 'cURL Copied to Clipboard!' : 'Copy cURL Command'}</span>
             </button>
           </div>
@@ -111,10 +111,10 @@ export const ApiPlayground: React.FC = () => {
 
         {/* Right Col: Live Response Preview */}
         <div className="graphite-card p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-[#26332E] pb-3">
-            <span className="text-xs font-bold uppercase text-[#F1F5F2]">Live API Response</span>
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <span className="text-xs font-bold uppercase text-slate-800">Live API Response</span>
             {latencyMs !== null && (
-              <span className="text-xs font-mono font-bold text-[#34D399] flex items-center space-x-1">
+              <span className="text-xs font-mono font-bold text-emerald-600 flex items-center space-x-1">
                 <Clock className="w-3.5 h-3.5" />
                 <span>{latencyMs}ms</span>
               </span>
@@ -122,13 +122,13 @@ export const ApiPlayground: React.FC = () => {
           </div>
 
           {!response ? (
-            <div className="h-64 flex items-center justify-center text-xs text-[#6B7A72] italic font-mono">
+            <div className="h-64 flex items-center justify-center text-xs text-slate-500 italic font-mono">
               Click 'Execute Request' to test the risk engine API
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg">
-                <pre className="text-xs font-mono text-[#34D399] overflow-x-auto max-h-96">
+              <div className="p-3 bg-white border border-slate-200 rounded-lg">
+                <pre className="text-xs font-mono text-emerald-600 overflow-x-auto max-h-96">
                   {JSON.stringify(response, null, 2)}
                 </pre>
               </div>
@@ -139,3 +139,5 @@ export const ApiPlayground: React.FC = () => {
     </div>
   );
 };
+
+

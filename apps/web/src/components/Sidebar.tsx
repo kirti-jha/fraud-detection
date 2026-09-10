@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -13,9 +13,15 @@ import {
   Code,
   Cpu,
   Activity,
+  X,
 } from 'lucide-react';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const navItems = [
     { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { label: 'Attack Simulator', path: '/simulator', icon: Flame },
@@ -31,17 +37,27 @@ export const Sidebar: React.FC = () => {
     { label: 'Audit Logs', path: '/audit-logs', icon: ScrollText },
   ];
 
-  return (
-    <aside className="w-64 bg-[#101615] border-r border-[#26332E] flex flex-col h-screen sticky top-0 z-20 font-sans select-none">
+  const sidebarContent = (
+    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col h-full font-sans select-none">
       {/* Header Brand */}
-      <div className="p-4 border-b border-[#26332E] flex items-center space-x-3">
-        <div className="p-2 bg-[#10B981] text-[#0B0F0E] rounded-lg shadow-sm">
-          <ShieldCheck className="w-5 h-5 stroke-[2.5]" />
+      <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+            <div className="p-2 bg-emerald-500 text-white rounded-lg shadow-sm">
+            <ShieldCheck className="w-5 h-5 stroke-[2.5]" />
+          </div>
+          <div>
+              <h1 className="font-bold text-sm text-slate-800 tracking-tight">FraudShield</h1>
+              <p className="text-[10px] text-emerald-600 font-mono tracking-wider uppercase font-semibold">Risk Intelligence</p>
+          </div>
         </div>
-        <div>
-          <h1 className="font-bold text-sm text-[#F1F5F2] tracking-tight">FraudShield</h1>
-          <p className="text-[10px] text-[#34D399] font-mono tracking-wider uppercase font-semibold">Risk Intelligence</p>
-        </div>
+        {/* Close button — visible only on mobile */}
+        <button
+          onClick={onClose}
+          className="lg:hidden p-1.5 text-slate-400 hover:text-slate-700 rounded-md hover:bg-slate-100 transition"
+          aria-label="Close sidebar"
+        >
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Nav List */}
@@ -52,11 +68,12 @@ export const Sidebar: React.FC = () => {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center space-x-3 px-3 py-2 rounded-md text-xs font-medium transition-all ${
+                `flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
                   isActive
-                    ? 'bg-[#151C1A] text-[#34D399] border-l-2 border-[#10B981] font-semibold'
-                    : 'text-[#9AA9A2] hover:text-[#F1F5F2] hover:bg-[#151C1A]/60'
+                    ? 'bg-emerald-50 text-emerald-700 border-l-2 border-emerald-500 font-semibold'
+                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
                 }`
               }
             >
@@ -68,15 +85,44 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Footer Metric */}
-      <div className="p-3 border-t border-[#26332E] bg-[#0B0F0E]/50">
-        <div className="text-[11px] text-[#9AA9A2] flex items-center justify-between font-mono">
+      <div className="p-3 border-t border-slate-200 bg-slate-50">
+        <div className="text-[11px] text-slate-400 flex items-center justify-between font-mono">
           <span>Decision SLA</span>
-          <span className="flex items-center text-[#34D399] font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse mr-1.5 inline-block"></span>
+          <span className="flex items-center text-emerald-600 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse mr-1.5 inline-block"></span>
             38.4ms
           </span>
         </div>
       </div>
     </aside>
   );
+
+  return (
+    <>
+      {/* ── Desktop: always-visible sticky sidebar ── */}
+      <div className="hidden lg:flex lg:flex-col lg:h-screen lg:sticky lg:top-0 lg:z-20 lg:w-64 lg:shrink-0">
+        {sidebarContent}
+      </div>
+
+      {/* ── Mobile: slide-over drawer with backdrop ── */}
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      {/* Drawer panel */}
+      <div
+        className={`fixed inset-y-0 left-0 z-40 h-full flex flex-col transition-transform duration-300 ease-in-out lg:hidden ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {sidebarContent}
+      </div>
+    </>
+  );
 };
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { fetchApi } from '../api/client';
 import { IBenchmarkReport } from '@fraudshield/shared-types';
 import { Cpu, Zap, Activity, Clock, Play, Download } from 'lucide-react';
@@ -37,13 +37,13 @@ export const BenchmarkLab: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#26332E] pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[#F1F5F2] tracking-tight flex items-center space-x-3">
-            <Cpu className="w-6 h-6 text-[#34D399]" />
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight flex items-center space-x-3">
+            <Cpu className="w-6 h-6 text-emerald-600" />
             <span>Benchmark & Concurrency Stress Lab</span>
           </h1>
-          <p className="text-[#9AA9A2] text-xs font-mono mt-1">Live concurrency stress testing, measured throughput (req/s), and P95/P99 latency SLA analysis</p>
+          <p className="text-slate-500 text-xs font-mono mt-1">Live concurrency stress testing, measured throughput (req/s), and P95/P99 latency SLA analysis</p>
         </div>
 
         {report && (
@@ -51,7 +51,7 @@ export const BenchmarkLab: React.FC = () => {
             onClick={exportReport}
             className="btn-secondary text-xs"
           >
-            <Download className="w-4 h-4 text-[#34D399]" />
+            <Download className="w-4 h-4 text-emerald-600" />
             <span>Export Report</span>
           </button>
         )}
@@ -59,15 +59,15 @@ export const BenchmarkLab: React.FC = () => {
 
       {/* Controls Card */}
       <div className="graphite-card p-6 space-y-5">
-        <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2 border-b border-[#26332E] pb-3">
-          <Zap className="w-4 h-4 text-[#F59E0B]" />
+        <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2 border-b border-slate-200 pb-3">
+          <Zap className="w-4 h-4 text-amber-600" />
           <span>Configure Load Generator Parameters</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <label className="block text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider mb-2 font-mono">
-              Total Transactions Payload: <strong className="text-[#34D399]">{requestsCount}</strong>
+            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-mono">
+              Total Transactions Payload: <strong className="text-emerald-600">{requestsCount}</strong>
             </label>
             <input
               type="range"
@@ -76,13 +76,13 @@ export const BenchmarkLab: React.FC = () => {
               step={20}
               value={requestsCount}
               onChange={(e) => setRequestsCount(parseInt(e.target.value, 10))}
-              className="w-full accent-[#10B981] cursor-pointer"
+              className="w-full accent-emerald-500 cursor-pointer"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider mb-2 font-mono">
-              Concurrency Batch Size: <strong className="text-[#34D399]">{concurrency} Threads</strong>
+            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-mono">
+              Concurrency Batch Size: <strong className="text-emerald-600">{concurrency} Threads</strong>
             </label>
             <input
               type="range"
@@ -91,7 +91,7 @@ export const BenchmarkLab: React.FC = () => {
               step={2}
               value={concurrency}
               onChange={(e) => setConcurrency(parseInt(e.target.value, 10))}
-              className="w-full accent-[#10B981] cursor-pointer"
+              className="w-full accent-emerald-500 cursor-pointer"
             />
           </div>
 
@@ -113,76 +113,76 @@ export const BenchmarkLab: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <div className="graphite-card p-5 space-y-2 font-mono">
-              <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider font-sans">Measured Throughput</span>
-              <p className="text-3xl font-bold text-[#34D399]">{report.reqPerSec} req/s</p>
-              <p className="text-xs text-[#6B7A72] font-sans">{report.totalRequests} Requests Executed</p>
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-sans">Measured Throughput</span>
+              <p className="text-3xl font-bold text-emerald-600">{report.reqPerSec} req/s</p>
+              <p className="text-xs text-slate-500 font-sans">{report.totalRequests} Requests Executed</p>
             </div>
 
             <div className="graphite-card p-5 space-y-2 font-mono">
-              <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider font-sans">Average Latency SLA</span>
-              <p className="text-3xl font-bold text-[#F1F5F2]">{report.avgLatencyMs}ms</p>
-              <p className="text-xs text-[#6B7A72] font-sans">Mean Execution Time</p>
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-sans">Average Latency SLA</span>
+              <p className="text-3xl font-bold text-slate-800">{report.avgLatencyMs}ms</p>
+              <p className="text-xs text-slate-500 font-sans">Mean Execution Time</p>
             </div>
 
             <div className="graphite-card p-5 space-y-2 font-mono">
-              <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider font-sans">P95 Latency SLA</span>
-              <p className="text-3xl font-bold text-[#34D399]">{report.p95LatencyMs}ms</p>
-              <p className="text-xs text-[#6B7A72] font-sans">95th Percentile SLA</p>
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-sans">P95 Latency SLA</span>
+              <p className="text-3xl font-bold text-emerald-600">{report.p95LatencyMs}ms</p>
+              <p className="text-xs text-slate-500 font-sans">95th Percentile SLA</p>
             </div>
 
             <div className="graphite-card p-5 space-y-2 font-mono">
-              <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider font-sans">P99 Latency SLA</span>
-              <p className="text-3xl font-bold text-[#F59E0B]">{report.p99LatencyMs}ms</p>
-              <p className="text-xs text-[#6B7A72] font-sans">99th Percentile SLA</p>
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-sans">P99 Latency SLA</span>
+              <p className="text-3xl font-bold text-amber-600">{report.p99LatencyMs}ms</p>
+              <p className="text-xs text-slate-500 font-sans">99th Percentile SLA</p>
             </div>
           </div>
 
           {/* Detailed Breakdown Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="graphite-card p-6 space-y-4">
-              <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2 border-b border-[#26332E] pb-3">
-                <Activity className="w-4 h-4 text-[#34D399]" />
+              <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2 border-b border-slate-200 pb-3">
+                <Activity className="w-4 h-4 text-emerald-600" />
                 <span>Decision Outcome Distribution</span>
               </h3>
 
               <div className="grid grid-cols-3 gap-4 text-center font-mono">
-                <div className="p-3 bg-[#34D399]/10 border border-[#34D399]/30 rounded-lg">
-                  <span className="text-xs text-[#34D399] font-semibold block font-sans">APPROVED</span>
-                  <span className="text-2xl font-bold text-[#F1F5F2] mt-1 block">{report.approveCount}</span>
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                  <span className="text-xs text-emerald-600 font-semibold block font-sans">APPROVED</span>
+                  <span className="text-2xl font-bold text-slate-800 mt-1 block">{report.approveCount}</span>
                 </div>
-                <div className="p-3 bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-lg">
-                  <span className="text-xs text-[#F59E0B] font-semibold block font-sans">REVIEW</span>
-                  <span className="text-2xl font-bold text-[#F1F5F2] mt-1 block">{report.reviewCount}</span>
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                  <span className="text-xs text-amber-600 font-semibold block font-sans">REVIEW</span>
+                  <span className="text-2xl font-bold text-slate-800 mt-1 block">{report.reviewCount}</span>
                 </div>
-                <div className="p-3 bg-[#F87171]/10 border border-[#F87171]/30 rounded-lg">
-                  <span className="text-xs text-[#F87171] font-semibold block font-sans">BLOCKED</span>
-                  <span className="text-2xl font-bold text-[#F1F5F2] mt-1 block">{report.blockCount}</span>
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <span className="text-xs text-red-500 font-semibold block font-sans">BLOCKED</span>
+                  <span className="text-2xl font-bold text-slate-800 mt-1 block">{report.blockCount}</span>
                 </div>
               </div>
             </div>
 
             <div className="graphite-card p-6 space-y-4">
-              <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2 border-b border-[#26332E] pb-3">
-                <Clock className="w-4 h-4 text-[#34D399]" />
+              <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2 border-b border-slate-200 pb-3">
+                <Clock className="w-4 h-4 text-emerald-600" />
                 <span>Pipeline Stage Latency Breakdown</span>
               </h3>
 
               <div className="space-y-3 text-xs font-mono">
-                <div className="flex justify-between py-1.5 border-b border-[#26332E]">
-                  <span className="text-[#9AA9A2] font-sans">1. Deterministic Risk Rules:</span>
-                  <span className="text-[#34D399] font-bold">{report.latencyBreakdown.rulesMs}ms</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1.5 border-b border-slate-200 gap-1">
+                  <span className="text-slate-500 font-sans">1. Deterministic Risk Rules:</span>
+                  <span className="text-emerald-600 font-bold">{report.latencyBreakdown.rulesMs}ms</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-[#26332E]">
-                  <span className="text-[#9AA9A2] font-sans">2. Redis Sliding Window Velocity:</span>
-                  <span className="text-[#34D399] font-bold">{report.latencyBreakdown.redisMs}ms</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1.5 border-b border-slate-200 gap-1">
+                  <span className="text-slate-500 font-sans">2. Redis Sliding Window Velocity:</span>
+                  <span className="text-emerald-600 font-bold">{report.latencyBreakdown.redisMs}ms</span>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-[#26332E]">
-                  <span className="text-[#9AA9A2] font-sans">3. Python ML Model Inference:</span>
-                  <span className="text-[#60A5FA] font-bold">{report.latencyBreakdown.mlMs}ms</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1.5 border-b border-slate-200 gap-1">
+                  <span className="text-slate-500 font-sans">3. Python ML Model Inference:</span>
+                  <span className="text-blue-500 font-bold">{report.latencyBreakdown.mlMs}ms</span>
                 </div>
-                <div className="flex justify-between py-1.5">
-                  <span className="text-[#9AA9A2] font-sans">4. PostgreSQL Persistence & Payment Rails:</span>
-                  <span className="text-[#34D399] font-bold">{report.latencyBreakdown.dbMs}ms</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between py-1.5 gap-1">
+                  <span className="text-slate-500 font-sans">4. PostgreSQL &amp; Payment Rails:</span>
+                  <span className="text-emerald-600 font-bold">{report.latencyBreakdown.dbMs}ms</span>
                 </div>
               </div>
             </div>
@@ -192,3 +192,5 @@ export const BenchmarkLab: React.FC = () => {
     </div>
   );
 };
+
+

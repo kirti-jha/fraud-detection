@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface RiskBadgeProps {
   score?: number;
@@ -52,3 +52,5 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ score, decision, severity 
 
   return null;
 };
+
+

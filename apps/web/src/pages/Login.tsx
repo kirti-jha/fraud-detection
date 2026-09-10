@@ -43,7 +43,7 @@ export const Login: React.FC = () => {
 
       if (res.success && res.data) {
         setLoading(false);
-        login(res.data.accessToken, res.data.refreshToken, res.data.user);
+        login(res.data.token || res.data.accessToken, res.data.refreshToken, res.data.user);
         navigate('/dashboard');
         return;
       }
@@ -80,10 +80,10 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F0E] text-[#F1F5F2] flex flex-col justify-between relative overflow-hidden font-sans select-none">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 text-slate-900 flex flex-col justify-between relative overflow-hidden font-sans select-none">
       {/* Ambient Graphite/Emerald Background Glow */}
-      <div className="brand-glow top-[-10%] left-[10%] w-[600px] h-[600px] bg-[#10B981]/10"></div>
-      <div className="brand-glow bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-[#10B981]/5"></div>
+      <div className="brand-glow top-[-10%] left-[10%] w-[600px] h-[600px] bg-emerald-400/20"></div>
+      <div className="brand-glow bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-emerald-300/15"></div>
 
       {/* Main Container */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-8 md:py-12 flex items-center justify-center z-10">
@@ -94,17 +94,17 @@ export const Login: React.FC = () => {
             
             {/* Header Branding */}
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-[#10B981] text-[#0B0F0E] rounded-xl shadow-sm flex items-center justify-center">
+              <div className="p-3 bg-emerald-500 text-white rounded-xl shadow-sm flex items-center justify-center">
                 <ShieldCheck className="w-8 h-8 stroke-[2.5]" />
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <span className="text-2xl font-bold text-[#F1F5F2] tracking-tight">FraudShield</span>
-                  <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded bg-[#10B981]/10 text-[#34D399] border border-[#10B981]/25 font-bold">
+                  <span className="text-2xl font-bold text-slate-800 tracking-tight">FraudShield</span>
+                  <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-600 border border-emerald-200 font-bold">
                     Enterprise Risk
                   </span>
                 </div>
-                <p className="text-xs text-[#9AA9A2] font-mono">
+                <p className="text-xs text-slate-500 font-mono">
                   Real-time transaction risk decisioning & intelligence platform.
                 </p>
               </div>
@@ -112,61 +112,61 @@ export const Login: React.FC = () => {
 
             {/* Core Value Proposition */}
             <div className="space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#F1F5F2] leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-800 leading-tight">
                 Autonomous risk decisioning <br className="hidden sm:block" />
                 <span className="gradient-text">for high-velocity fintechs.</span>
               </h2>
-              <p className="text-sm text-[#9AA9A2] leading-relaxed max-w-xl">
+              <p className="text-sm text-slate-500 leading-relaxed max-w-xl">
                 Evaluate multi-signal rules, sliding-window Redis velocity limits, and real-time Python ML fraud probability in under 50ms.
               </p>
             </div>
 
             {/* Subtle Risk Decision Pipeline Card */}
-            <div className="graphite-card p-5 border-[#26332E] space-y-4">
-              <div className="flex items-center justify-between text-xs text-[#9AA9A2] font-mono border-b border-[#26332E] pb-3">
-                <div className="flex items-center gap-2 text-[#F1F5F2] font-semibold">
-                  <Activity className="w-4 h-4 text-[#34D399]" />
+            <div className="graphite-card p-5 border-slate-200 space-y-4">
+              <div className="flex items-center justify-between text-xs text-slate-500 font-mono border-b border-slate-200 pb-3">
+                <div className="flex items-center gap-2 text-slate-800 font-semibold">
+                  <Activity className="w-4 h-4 text-emerald-600" />
                   <span>Real-Time Risk Decision Pipeline</span>
                 </div>
-                <div className="text-[#34D399] font-bold flex items-center gap-1.5 bg-[#10B981]/10 px-2.5 py-0.5 rounded border border-[#10B981]/25">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse"></span>
+                <div className="text-emerald-600 font-bold flex items-center gap-1.5 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
                   <span>SLA &lt; 42ms</span>
                 </div>
               </div>
 
               {/* Sequential Flow Nodes */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center font-mono">
-                <div className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg flex flex-col justify-center items-center">
-                  <span className="text-[9px] text-[#6B7A72] uppercase tracking-wider block font-bold mb-1">01 &bull; Ingest</span>
-                  <span className="text-xs font-semibold text-[#F1F5F2]">Idempotency</span>
+                <div className="p-3 bg-white border border-slate-200 rounded-lg flex flex-col justify-center items-center">
+                  <span className="text-[9px] text-slate-500 uppercase tracking-wider block font-bold mb-1">01 &bull; Ingest</span>
+                  <span className="text-xs font-semibold text-slate-800">Idempotency</span>
                 </div>
-                <div className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg flex flex-col justify-center items-center">
-                  <span className="text-[9px] text-[#6B7A72] uppercase tracking-wider block font-bold mb-1">02 &bull; Rules</span>
-                  <span className="text-xs font-semibold text-[#34D399]">Risk Engine</span>
+                <div className="p-3 bg-white border border-slate-200 rounded-lg flex flex-col justify-center items-center">
+                  <span className="text-[9px] text-slate-500 uppercase tracking-wider block font-bold mb-1">02 &bull; Rules</span>
+                  <span className="text-xs font-semibold text-emerald-600">Risk Engine</span>
                 </div>
-                <div className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg flex flex-col justify-center items-center">
-                  <span className="text-[9px] text-[#6B7A72] uppercase tracking-wider block font-bold mb-1">03 &bull; Velocity</span>
-                  <span className="text-xs font-semibold text-[#F59E0B]">Redis Limits</span>
+                <div className="p-3 bg-white border border-slate-200 rounded-lg flex flex-col justify-center items-center">
+                  <span className="text-[9px] text-slate-500 uppercase tracking-wider block font-bold mb-1">03 &bull; Velocity</span>
+                  <span className="text-xs font-semibold text-amber-600">Redis Limits</span>
                 </div>
-                <div className="p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg flex flex-col justify-center items-center">
-                  <span className="text-[9px] text-[#6B7A72] uppercase tracking-wider block font-bold mb-1">04 &bull; Inference</span>
-                  <span className="text-xs font-semibold text-[#60A5FA]">Python ML</span>
+                <div className="p-3 bg-white border border-slate-200 rounded-lg flex flex-col justify-center items-center">
+                  <span className="text-[9px] text-slate-500 uppercase tracking-wider block font-bold mb-1">04 &bull; Inference</span>
+                  <span className="text-xs font-semibold text-blue-500">Python ML</span>
                 </div>
               </div>
             </div>
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#26332E] text-xs">
-              <div className="flex items-center gap-2 text-[#F1F5F2] font-medium">
-                <Zap className="w-4 h-4 text-[#34D399] flex-shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-200 text-xs">
+              <div className="flex items-center gap-2 text-slate-800 font-medium">
+                <Zap className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                 <span>Real-time decisions</span>
               </div>
-              <div className="flex items-center gap-2 text-[#F1F5F2] font-medium">
-                <ShieldAlert className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+              <div className="flex items-center gap-2 text-slate-800 font-medium">
+                <ShieldAlert className="w-4 h-4 text-amber-600 flex-shrink-0" />
                 <span>Explainable risk signals</span>
               </div>
-              <div className="flex items-center gap-2 text-[#F1F5F2] font-medium">
-                <Cpu className="w-4 h-4 text-[#60A5FA] flex-shrink-0" />
+              <div className="flex items-center gap-2 text-slate-800 font-medium">
+                <Cpu className="w-4 h-4 text-blue-500 flex-shrink-0" />
                 <span>Analyst-ready workflows</span>
               </div>
             </div>
@@ -175,20 +175,47 @@ export const Login: React.FC = () => {
 
           {/* RIGHT COLUMN: Centered Enterprise Login Card */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="graphite-card-elevated p-8 sm:p-10 w-full max-w-md space-y-6 border-[#26332E] shadow-2xl relative">
+            <div className="graphite-card-elevated p-8 sm:p-10 w-full max-w-md space-y-6 border-slate-200 shadow-2xl relative">
               
               {/* Card Header */}
               <div className="space-y-1.5 text-left">
-                <h3 className="text-xl font-bold text-[#F1F5F2] tracking-tight">Welcome back</h3>
-                <p className="text-xs text-[#9AA9A2]">
+                <h3 className="text-xl font-bold text-slate-800 tracking-tight">Welcome back</h3>
+                <p className="text-xs text-slate-500">
                   Sign in to access your FraudShield Analyst Operations Portal
                 </p>
               </div>
 
+              {/* ── ONE-CLICK DEMO MODE BUTTON ── */}
+              <button
+                type="button"
+                onClick={() => {
+                  login('demo_analyst_token', 'demo_refresh', {
+                    id: 'demo-analyst-1',
+                    email: 'analyst@fraudshield.io',
+                    fullName: 'Senior Fraud Analyst',
+                    role: 'ANALYST' as any,
+                    status: 'ACTIVE',
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                  });
+                  navigate('/dashboard');
+                }}
+                className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 border border-emerald-400 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2 transition shadow-sm"
+              >
+                <Zap className="w-4 h-4" />
+                Enter Demo Mode — No Backend Needed
+              </button>
+
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-slate-200" />
+                <span className="text-[11px] text-slate-500 font-mono">or sign in</span>
+                <div className="flex-1 h-px bg-slate-200" />
+              </div>
+
               {/* Error Status Banner */}
               {error && (
-                <div className="p-3.5 bg-[#F87171]/10 border border-[#F87171]/30 rounded-lg text-[#F87171] text-xs font-medium flex items-start gap-2.5">
-                  <ShieldAlert className="w-4 h-4 text-[#F87171] flex-shrink-0 mt-0.5" />
+                <div className="p-3.5 bg-red-50 border border-red-200 rounded-lg text-red-500 text-xs font-medium flex items-start gap-2.5">
+                  <ShieldAlert className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
                   <span>{error}</span>
                 </div>
               )}
@@ -198,41 +225,41 @@ export const Login: React.FC = () => {
                 
                 {/* Email Field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Email Address
                   </label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-[#6B7A72] absolute left-3.5 top-3.5 pointer-events-none" />
+                  <div className="relative flex items-center">
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       placeholder="analyst@fraudshield.io"
-                      className="input-premium pl-10"
+                      className="input-premium !pl-10"
                     />
                   </div>
                 </div>
 
                 {/* Password Field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Password
                   </label>
-                  <div className="relative">
-                    <Lock className="w-4 h-4 text-[#6B7A72] absolute left-3.5 top-3.5 pointer-events-none" />
+                  <div className="relative flex items-center">
+                    <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       placeholder="••••••••••••"
-                      className="input-premium pl-10 pr-10"
+                      className="input-premium !pl-10 !pr-10"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-3 text-[#6B7A72] hover:text-[#F1F5F2] transition focus:outline-none"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition focus:outline-none z-10"
                       title={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -252,13 +279,13 @@ export const Login: React.FC = () => {
               </form>
 
               {/* Expandable Demo Credentials Drawer */}
-              <div className="pt-4 border-t border-[#26332E]">
+              <div className="pt-4 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setShowDemoCredentials(!showDemoCredentials)}
-                  className="w-full flex items-center justify-between text-xs text-[#9AA9A2] hover:text-[#F1F5F2] transition py-1 focus:outline-none"
+                  className="w-full flex items-center justify-between text-xs text-slate-500 hover:text-slate-800 transition py-1 focus:outline-none"
                 >
-                  <span className="flex items-center gap-1.5 font-semibold text-[#34D399]">
+                  <span className="flex items-center gap-1.5 font-semibold text-emerald-600">
                     <KeyRound className="w-3.5 h-3.5" />
                     <span>Demo Credentials</span>
                   </span>
@@ -266,16 +293,16 @@ export const Login: React.FC = () => {
                 </button>
 
                 {showDemoCredentials && (
-                  <div className="mt-3 p-3 bg-[#0B0F0E] border border-[#26332E] rounded-lg space-y-2 text-xs font-mono">
-                    <div className="flex items-center justify-between py-1 border-b border-[#26332E]">
+                  <div className="mt-3 p-3 bg-white border border-slate-200 rounded-lg space-y-2 text-xs font-mono">
+                    <div className="flex items-center justify-between py-1 border-b border-slate-200">
                       <div>
-                        <p className="text-[#F1F5F2] font-semibold font-sans">Senior Fraud Analyst</p>
-                        <p className="text-[10px] text-[#6B7A72]">analyst@fraudshield.io</p>
+                        <p className="text-slate-800 font-semibold font-sans">Senior Fraud Analyst</p>
+                        <p className="text-[10px] text-slate-500">analyst@fraudshield.io</p>
                       </div>
                       <button
                         type="button"
                         onClick={() => fillCredentials('analyst@fraudshield.io', 'Password123!')}
-                        className="px-2.5 py-1 bg-[#10B981]/10 hover:bg-[#10B981]/20 text-[#34D399] rounded text-[10px] font-bold border border-[#10B981]/30 transition flex items-center gap-1"
+                        className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 rounded text-[10px] font-bold border border-emerald-300 transition flex items-center gap-1"
                       >
                         <CheckCircle2 className="w-3 h-3" />
                         <span>Autofill</span>
@@ -284,13 +311,13 @@ export const Login: React.FC = () => {
 
                     <div className="flex items-center justify-between py-1">
                       <div>
-                        <p className="text-[#F1F5F2] font-semibold font-sans">System Administrator</p>
-                        <p className="text-[10px] text-[#6B7A72]">admin@fraudshield.io</p>
+                        <p className="text-slate-800 font-semibold font-sans">System Administrator</p>
+                        <p className="text-[10px] text-slate-500">admin@fraudshield.io</p>
                       </div>
                       <button
                         type="button"
                         onClick={() => fillCredentials('admin@fraudshield.io', 'Password123!')}
-                        className="px-2.5 py-1 bg-[#10B981]/10 hover:bg-[#10B981]/20 text-[#34D399] rounded text-[10px] font-bold border border-[#10B981]/30 transition flex items-center gap-1"
+                        className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 rounded text-[10px] font-bold border border-emerald-300 transition flex items-center gap-1"
                       >
                         <CheckCircle2 className="w-3 h-3" />
                         <span>Autofill</span>
@@ -307,9 +334,11 @@ export const Login: React.FC = () => {
       </main>
 
       {/* Enterprise Footer */}
-      <footer className="py-4 border-t border-[#26332E] text-center text-xs text-[#6B7A72] z-10 font-mono">
+      <footer className="py-4 border-t border-slate-200 text-center text-xs text-slate-500 z-10 font-mono">
         FraudShield Risk Engine v1.0.0 &bull; Enterprise FinTech Intelligence
       </footer>
     </div>
   );
 };
+
+

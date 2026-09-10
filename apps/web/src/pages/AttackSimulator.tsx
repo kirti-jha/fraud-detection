@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { fetchApi } from '../api/client';
 import { RiskExplanationCard } from '../components/RiskExplanationCard';
 import { Play, Activity, Cpu, Zap, CheckCircle2, Flame, RefreshCw } from 'lucide-react';
@@ -80,7 +80,7 @@ export const AttackSimulator: React.FC = () => {
       name: 'Sudden Amount Spike',
       category: 'Behavioral Anomaly',
       description: 'User average history is ₹2,000, suddenly attempts ₹95,000 transaction.',
-      badgeColor: 'badge-[#F59E0B]',
+      badgeColor: 'badge-amber-600',
       payload: {
         userId: 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22',
         amount: 95000,
@@ -141,12 +141,12 @@ export const AttackSimulator: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="border-b border-[#26332E] pb-6">
-        <h1 className="text-2xl font-bold text-[#F1F5F2] tracking-tight flex items-center space-x-3">
-          <Flame className="w-6 h-6 text-[#F87171]" />
+      <div className="border-b border-slate-200 pb-6">
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight flex items-center space-x-3">
+          <Flame className="w-6 h-6 text-red-500" />
           <span>Fraud Attack Simulation Lab</span>
         </h1>
-        <p className="text-[#9AA9A2] text-xs font-mono mt-1">
+        <p className="text-slate-500 text-xs font-mono mt-1">
           Select real-world attack vectors and watch FraudShield evaluate risk in real time
         </p>
       </div>
@@ -156,8 +156,8 @@ export const AttackSimulator: React.FC = () => {
         {scenarios.map((sc) => (
           <div
             key={sc.id}
-            className={`graphite-card p-5 space-y-4 cursor-pointer hover:border-[#344740] transition group ${
-              selectedScenario === sc.id ? 'border-[#10B981] ring-1 ring-[#10B981]/30' : ''
+            className={`graphite-card p-5 space-y-4 cursor-pointer hover:border-slate-300 transition group ${
+              selectedScenario === sc.id ? 'border-emerald-500 ring-1 ring-emerald-200' : ''
             }`}
             onClick={() => !executing && runSimulation(sc)}
           >
@@ -165,17 +165,17 @@ export const AttackSimulator: React.FC = () => {
               <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${sc.badgeColor}`}>
                 {sc.category}
               </span>
-              <Play className="w-4 h-4 text-[#34D399] group-hover:scale-125 transition" />
+              <Play className="w-4 h-4 text-emerald-600 group-hover:scale-125 transition" />
             </div>
 
             <div>
-              <h3 className="text-sm font-bold text-[#F1F5F2] group-hover:text-[#34D399] transition">{sc.name}</h3>
-              <p className="text-xs text-[#9AA9A2] mt-1 leading-relaxed">{sc.description}</p>
+              <h3 className="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition">{sc.name}</h3>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">{sc.description}</p>
             </div>
 
-            <div className="pt-2 border-t border-[#26332E] text-[11px] font-mono text-[#9AA9A2] flex justify-between">
-              <span>Amount: <strong className="text-[#F1F5F2]">₹{sc.payload.amount.toLocaleString()}</strong></span>
-              <span className="text-[#34D399]">Run Attack →</span>
+            <div className="pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-500 flex justify-between">
+              <span>Amount: <strong className="text-slate-800">₹{sc.payload.amount.toLocaleString()}</strong></span>
+              <span className="text-emerald-600">Run Attack →</span>
             </div>
           </div>
         ))}
@@ -184,12 +184,12 @@ export const AttackSimulator: React.FC = () => {
       {/* Live Pipeline Execution Animation */}
       {stepIndex >= 0 && (
         <div className="graphite-card p-6 space-y-6">
-          <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2 border-b border-[#26332E] pb-3">
-            <Activity className="w-4 h-4 text-[#34D399]" />
+          <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2 border-b border-slate-200 pb-3">
+            <Activity className="w-4 h-4 text-emerald-600" />
             <span>Live Risk Decision Pipeline Execution</span>
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3 font-mono">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 font-mono">
             {stepsList.map((st, idx) => {
               const Icon = st.icon;
               const isCurrent = stepIndex === idx;
@@ -200,15 +200,15 @@ export const AttackSimulator: React.FC = () => {
                   key={idx}
                   className={`p-3.5 rounded-lg border text-xs space-y-2 transition ${
                     isCompleted
-                      ? 'bg-[#10B981]/10 border-[#10B981]/30 text-[#34D399]'
+                      ? 'bg-emerald-50 border-emerald-300 text-emerald-600'
                       : isCurrent
-                      ? 'bg-[#10B981]/20 border-[#10B981] text-[#34D399] animate-pulse'
-                      : 'bg-[#0B0F0E] border-[#26332E] text-[#6B7A72]'
+                      ? 'bg-emerald-100 border-emerald-500 text-emerald-600 animate-pulse'
+                      : 'bg-white border-slate-200 text-slate-500'
                   }`}
                 >
                   <div className="flex items-center justify-between font-bold text-[10px]">
                     <span>STEP 0{idx + 1}</span>
-                    {isCompleted ? <CheckCircle2 className="w-4 h-4 text-[#34D399]" /> : <Icon className="w-4 h-4" />}
+                    {isCompleted ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <Icon className="w-4 h-4" />}
                   </div>
                   <p className="font-semibold font-sans">{st.title}</p>
                 </div>
@@ -221,7 +221,7 @@ export const AttackSimulator: React.FC = () => {
       {/* Risk Explanation Result Card */}
       {resultData && (
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-[#F1F5F2]">Live Decision Result</h3>
+          <h3 className="text-sm font-bold text-slate-800">Live Decision Result</h3>
           <RiskExplanationCard
             transactionRef={resultData.transaction?.transactionRef || 'TXN_SIMULATED'}
             amount={resultData.transaction?.amount || 0}
@@ -235,3 +235,5 @@ export const AttackSimulator: React.FC = () => {
     </div>
   );
 };
+
+

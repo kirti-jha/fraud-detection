@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ScrollText } from 'lucide-react';
 
 export const AuditLogs: React.FC = () => {
@@ -31,18 +31,18 @@ export const AuditLogs: React.FC = () => {
 
   return (
     <div className="p-6 md:p-8 space-y-6 max-w-6xl mx-auto font-sans">
-      <div className="border-b border-[#26332E] pb-6">
-        <h1 className="text-2xl font-bold text-[#F1F5F2] tracking-tight flex items-center space-x-3">
-          <ScrollText className="w-6 h-6 text-[#34D399]" />
+      <div className="border-b border-slate-200 pb-6">
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight flex items-center space-x-3">
+          <ScrollText className="w-6 h-6 text-emerald-600" />
           <span>System Audit Trail</span>
         </h1>
-        <p className="text-[#9AA9A2] text-xs font-mono mt-1">Immutable security log of analyst actions and risk engine evaluations</p>
+        <p className="text-slate-500 text-xs font-mono mt-1">Immutable security log of analyst actions and risk engine evaluations</p>
       </div>
 
       <div className="graphite-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="text-[#9AA9A2] uppercase tracking-wider bg-[#0B0F0E] border-b border-[#26332E] font-mono text-[11px]">
+            <thead className="text-slate-500 uppercase tracking-wider bg-white border-b border-slate-200 font-mono text-[11px]">
               <tr>
                 <th className="p-3.5">Audit ID</th>
                 <th className="p-3.5">Action</th>
@@ -52,15 +52,15 @@ export const AuditLogs: React.FC = () => {
                 <th className="p-3.5">Timestamp</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#26332E] font-mono">
+            <tbody className="divide-y divide-slate-200 font-mono">
               {auditEntries.map((log) => (
-                <tr key={log.id} className="hover:bg-[#1C2522]/60 transition">
-                  <td className="p-3.5 font-bold text-[#34D399]">{log.id}</td>
-                  <td className="p-3.5 text-[#34D399] font-semibold">{log.action}</td>
-                  <td className="p-3.5 text-[#F1F5F2] font-sans">{log.actor}</td>
-                  <td className="p-3.5 text-[#9AA9A2]">{log.entity}</td>
-                  <td className="p-3.5 text-[#F1F5F2] font-sans">{log.details}</td>
-                  <td className="p-3.5 text-[#6B7A72]">{new Date(log.timestamp).toLocaleString()}</td>
+                <tr key={log.id} className="hover:bg-slate-100/60 transition">
+                  <td className="p-3.5 font-bold text-emerald-600">{log.id}</td>
+                  <td className="p-3.5 text-emerald-600 font-semibold">{log.action}</td>
+                  <td className="p-3.5 text-slate-800 font-sans">{log.actor}</td>
+                  <td className="p-3.5 text-slate-500">{log.entity}</td>
+                  <td className="p-3.5 text-slate-800 font-sans">{log.details}</td>
+                  <td className="p-3.5 text-slate-500">{new Date(log.timestamp).toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -70,3 +70,5 @@ export const AuditLogs: React.FC = () => {
     </div>
   );
 };
+
+

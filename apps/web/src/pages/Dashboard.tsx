@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { fetchApi } from '../api/client';
 import { RiskBadge } from '../components/RiskBadge';
 import { ITransaction, IAlert } from '@fraudshield/shared-types';
@@ -63,29 +63,29 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto font-sans">
       {/* Header & Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#26332E] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[#F1F5F2] tracking-tight">Real-Time Risk Dashboard</h1>
-          <p className="text-[#9AA9A2] text-xs font-mono mt-1">Live transaction monitoring and fraud detection metrics</p>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Real-Time Risk Dashboard</h1>
+          <p className="text-slate-500 text-xs font-mono mt-1">Live transaction monitoring and fraud detection metrics</p>
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => simulateTransaction(false)}
             disabled={simulating}
             className="btn-secondary text-xs"
           >
-            <Play className="w-3.5 h-3.5 text-[#34D399]" />
-            <span>Simulate Normal Txn</span>
+            <Play className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Simulate Normal</span>
           </button>
 
           <button
             onClick={() => simulateTransaction(true)}
             disabled={simulating}
-            className="px-4 py-2 bg-[#F87171]/15 hover:bg-[#F87171]/25 text-[#F87171] rounded-lg text-xs font-semibold flex items-center space-x-2 border border-[#F87171]/30 transition"
+            className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg text-xs font-semibold flex items-center space-x-2 border border-red-200 transition"
           >
-            <Play className="w-3.5 h-3.5 text-[#F87171]" />
-            <span>Simulate Fraud Spike (₹85k)</span>
+            <Play className="w-3.5 h-3.5 text-red-500" />
+            <span>Fraud Spike (₹85k)</span>
           </button>
         </div>
       </div>
@@ -94,46 +94,46 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="graphite-card p-5 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">Total Evaluated</span>
-            <div className="p-2 bg-[#60A5FA]/10 rounded-lg text-[#60A5FA]">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Evaluated</span>
+            <div className="p-2 bg-blue-50 rounded-lg text-blue-500">
               <CreditCard className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-3xl font-bold text-[#F1F5F2] font-mono">{totalTxns}</p>
-          <p className="text-xs text-[#6B7A72]">Transactions in ledger</p>
+          <p className="text-3xl font-bold text-slate-800 font-mono">{totalTxns}</p>
+          <p className="text-xs text-slate-500">Transactions in ledger</p>
         </div>
 
         <div className="graphite-card p-5 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">Approved</span>
-            <div className="p-2 bg-[#34D399]/10 rounded-lg text-[#34D399]">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Approved</span>
+            <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600">
               <CheckCircle className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-3xl font-bold text-[#34D399] font-mono">{approvedCount}</p>
-          <p className="text-xs text-[#6B7A72]">Risk score ≤ 30</p>
+          <p className="text-3xl font-bold text-emerald-600 font-mono">{approvedCount}</p>
+          <p className="text-xs text-slate-500">Risk score ≤ 30</p>
         </div>
 
         <div className="graphite-card p-5 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">Review Queue</span>
-            <div className="p-2 bg-[#F59E0B]/10 rounded-lg text-[#F59E0B]">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Review Queue</span>
+            <div className="p-2 bg-amber-50 rounded-lg text-amber-600">
               <AlertTriangle className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-3xl font-bold text-[#F59E0B] font-mono">{reviewCount}</p>
-          <p className="text-xs text-[#6B7A72]">Score 31–70 (Analyst Review)</p>
+          <p className="text-3xl font-bold text-amber-600 font-mono">{reviewCount}</p>
+          <p className="text-xs text-slate-500">Score 31–70 (Analyst Review)</p>
         </div>
 
         <div className="graphite-card p-5 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#9AA9A2] uppercase tracking-wider">Blocked</span>
-            <div className="p-2 bg-[#F87171]/10 rounded-lg text-[#F87171]">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Blocked</span>
+            <div className="p-2 bg-red-50 rounded-lg text-red-500">
               <XCircle className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-3xl font-bold text-[#F87171] font-mono">{blockedCount}</p>
-          <p className="text-xs text-[#6B7A72]">Score 71–100 (High Risk)</p>
+          <p className="text-3xl font-bold text-red-500 font-mono">{blockedCount}</p>
+          <p className="text-xs text-slate-500">Score 71–100 (High Risk)</p>
         </div>
       </div>
 
@@ -142,33 +142,33 @@ export const Dashboard: React.FC = () => {
         {/* Recent Suspicious Alerts */}
         <div className="graphite-card p-6 lg:col-span-1 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2">
-              <ShieldAlert className="w-4 h-4 text-[#F59E0B]" />
+            <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2">
+              <ShieldAlert className="w-4 h-4 text-amber-600" />
               <span>Fraud Alert Queue</span>
             </h3>
-            <Link to="/alerts" className="text-xs text-[#34D399] hover:underline font-semibold font-mono">View All</Link>
+            <Link to="/alerts" className="text-xs text-emerald-600 hover:underline font-semibold font-mono">View All</Link>
           </div>
 
           {alerts.length === 0 ? (
-            <p className="text-xs text-[#6B7A72] py-6 text-center italic">No open alerts in queue</p>
+            <p className="text-xs text-slate-500 py-6 text-center italic">No open alerts in queue</p>
           ) : (
             <div className="space-y-3">
               {alerts.map((alert) => (
                 <Link
                   key={alert.id}
                   to={`/alerts/${alert.id}`}
-                  className="block p-3.5 bg-[#0B0F0E] border border-[#26332E] hover:border-[#344740] rounded-lg transition group"
+                  className="block p-3.5 bg-white border border-slate-200 hover:border-slate-300 rounded-lg transition group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-semibold text-[#34D399] group-hover:underline">
+                    <span className="text-xs font-mono font-semibold text-emerald-600 group-hover:underline">
                       {alert.alertRef}
                     </span>
                     <RiskBadge severity={alert.severity} />
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-[#9AA9A2] mt-2 font-mono">
-                    <span>Score: <strong className="text-[#F1F5F2]">{alert.riskScore}</strong></span>
-                    <span className="uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-[#1C2522] text-[#9AA9A2]">
+                  <div className="flex items-center justify-between text-xs text-slate-500 mt-2 font-mono">
+                    <span>Score: <strong className="text-slate-800">{alert.riskScore}</strong></span>
+                    <span className="uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-500">
                       {alert.status}
                     </span>
                   </div>
@@ -181,37 +181,37 @@ export const Dashboard: React.FC = () => {
         {/* Live Transaction Stream */}
         <div className="graphite-card p-6 lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-[#F1F5F2] flex items-center space-x-2">
-              <Activity className="w-4 h-4 text-[#34D399]" />
+            <h3 className="text-sm font-bold text-slate-800 flex items-center space-x-2">
+              <Activity className="w-4 h-4 text-emerald-600" />
               <span>Recent Evaluated Transactions</span>
             </h3>
-            <Link to="/transactions" className="text-xs text-[#34D399] hover:underline font-semibold font-mono">View Ledger</Link>
+            <Link to="/transactions" className="text-xs text-emerald-600 hover:underline font-semibold font-mono">View Ledger</Link>
           </div>
 
           {loading ? (
-            <p className="text-xs text-[#6B7A72] py-8 text-center font-mono">Loading transactions...</p>
+            <p className="text-xs text-slate-500 py-8 text-center font-mono">Loading transactions...</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="text-[#9AA9A2] uppercase tracking-wider bg-[#0B0F0E] font-mono text-[11px]">
+                <thead className="text-slate-500 uppercase tracking-wider bg-white font-mono text-[11px]">
                   <tr>
                     <th className="p-3">Txn Ref</th>
                     <th className="p-3">Amount</th>
-                    <th className="p-3">Device / IP</th>
+                    <th className="p-3 hidden sm:table-cell">Device / IP</th>
                     <th className="p-3">Score</th>
                     <th className="p-3">Decision</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#26332E]">
+                <tbody className="divide-y divide-slate-200">
                   {transactions.map((txn) => (
-                    <tr key={txn.id} className="hover:bg-[#1C2522]/60 transition">
-                      <td className="p-3 font-mono font-semibold text-[#34D399]">
+                    <tr key={txn.id} className="hover:bg-slate-100/60 transition">
+                      <td className="p-3 font-mono font-semibold text-emerald-600">
                         <Link to={`/transactions/${txn.id}`} className="hover:underline">{txn.transactionRef}</Link>
                       </td>
-                      <td className="p-3 font-mono font-bold text-[#F1F5F2]">
+                      <td className="p-3 font-mono font-bold text-slate-800">
                         ₹{Number(txn.amount).toLocaleString()}
                       </td>
-                      <td className="p-3 text-[#9AA9A2] font-mono text-[11px]">
+                      <td className="p-3 text-slate-500 font-mono text-[11px] hidden sm:table-cell">
                         {txn.deviceId} ({txn.ipAddress})
                       </td>
                       <td className="p-3">
@@ -231,3 +231,5 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
+
+

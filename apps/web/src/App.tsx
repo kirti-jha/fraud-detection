@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, NavLink } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Sidebar } from './components/Sidebar';
 import { Navbar } from './components/Navbar';
@@ -19,13 +19,58 @@ import { Operations } from './pages/Operations';
 import { Rules } from './pages/Rules';
 import { ApiPlayground } from './pages/ApiPlayground';
 import { AuditLogs } from './pages/AuditLogs';
+import {
+  LayoutDashboard,
+  Flame,
+  CreditCard,
+  ShieldAlert,
+  BarChart3,
+} from 'lucide-react';
+
+/** Mobile bottom nav — 5 most-used links, hidden on lg+ */
+const MobileBottomNav: React.FC = () => {
+  const bottomItems = [
+    { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { label: 'Simulator', path: '/simulator', icon: Flame },
+    { label: 'Ledger', path: '/transactions', icon: CreditCard },
+    { label: 'Alerts', path: '/alerts', icon: ShieldAlert },
+    { label: 'Intelligence', path: '/intelligence', icon: BarChart3 },
+  ];
+
+  return (
+    <nav className="fixed bottom-0 inset-x-0 z-20 lg:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-lg flex items-stretch h-16 safe-bottom">
+      {bottomItems.map((item) => {
+        const Icon = item.icon;
+        return (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold transition-colors ${
+                isActive ? 'text-emerald-600' : 'text-slate-400 hover:text-slate-600'
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                <Icon className={`w-5 h-5 ${isActive ? 'text-emerald-500' : ''}`} />
+                <span>{item.label}</span>
+              </>
+            )}
+          </NavLink>
+        );
+      })}
+    </nav>
+  );
+};
 
 const ProtectedLayout: React.FC = () => {
   const { token, isLoading } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 text-xs font-mono">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-400 text-xs font-mono">
         Initializing FraudShield Enterprise Risk Engine...
       </div>
     );
@@ -36,11 +81,12 @@ const ProtectedLayout: React.FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-950">
-      <Sidebar />
+    <div className="flex min-h-screen bg-slate-50">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 flex flex-col min-w-0">
-        <Navbar />
-        <main className="flex-1 overflow-y-auto">
+        <Navbar onMenuToggle={() => setSidebarOpen((prev) => !prev)} />
+        {/* pb-16 lg:pb-0 — clears space for mobile bottom nav */}
+        <main className="flex-1 overflow-y-auto pb-16 lg:pb-0">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/simulator" element={<AttackSimulator />} />
@@ -61,6 +107,7 @@ const ProtectedLayout: React.FC = () => {
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>
+        <MobileBottomNav />
       </div>
     </div>
   );
@@ -80,3 +127,5 @@ export const App: React.FC = () => {
 };
 
 export default App;
+
+
